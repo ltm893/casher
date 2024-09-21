@@ -1,31 +1,172 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Casher</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-      
-        <div>
-            <div><label for="pennies-input"><input type="text" id="pennies-input" name="pennies-input"></label></div>
-            <div><label for="nickels-input"><input type="text" id="nickels-input" name="nickels-input"></label></div>
-            <div id="til-total"></div>
-        </div>
-        <script src="" async defer>
-             
-            const elPennyInput = document.getElementById("pennies-input")
-            const elNicketInput = document.getElementById("nickels-input")
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Casher</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        .wrapper {
+            background-color: whitesmoke;
+            list-style-type: none;
+            padding: 0;
+            border-radius: 25px;
+            width: 20em;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: flex-start;
+            padding: .5em;
+        }
+
+        .form-row>label {
+            padding: .5em 1em .5em 0;
+            flex: 2;
+            flex-basis: 4em;
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+
+        .form-row>input {
+            flex: 1;
+            flex-basis: 4em;
+            flex-grow: 0;
+            flex-shrink: 0;
+            width: 100%;
+            min-width: 0;
+            border-radius: 25px
+        }
 
 
-            const elTillTotal = document.getElementById("til-total")
+        .form-row>input,
+        .form-row>button {
+            padding: .5em;
+        }
 
-            totalTill = () => tillPennyHtml + ( 5 * tillNickelHtml ) 
+        .form-row>button {
+            background: gray;
+            color: white;
+            border: 0;
+        }
 
-        </script>
-    </body>
+        /*
+        @media screen and (min-width: 768px) {
+            .form-row>input {
+                flex: 3;
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            .form-row>input {
+                flex: 4;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .form-row>input {
+                flex: 5;
+            }
+        }
+       */
+    </style>
+
+</head>
+
+<body>
+    <ul class="wrapper">
+        <li class="form-row">
+            <label for="fifty-input">Fifty</label>
+            <input type="text" id="fifty-input" name="fifty-input">
+        </li>
+
+        <li class="form-row">
+            <label for="twenty-input">Twenty</label>
+            <input type="text" id="twenty-input" name="twenty-input">
+        </li>
+
+        <li class="form-row">
+            <label for="ten-input">Tens</label>
+            <input type="text" id="ten-input" name="ten-input" class="TillInput">
+        </li>
+        <li class="form-row">
+            <label for="fives-input">Fives</label>
+            <input type="text" id="fives-input" name="fives-input" class="TillInput">
+        </li>
+        <li class="form-row">
+            <label for="dollars-input">Dollars</label>
+            <input type="text" id="dollars-input" name="dollars-input" class="TillInput">
+        </li>
+        <li class="form-row">
+            <label for="quarters-input">Quarters</label>
+            <input type="text" id="quarters-input" name="quarters-input" class="TillInput">
+        </li>
+
+        <li class="form-row">
+            <label for="dimes-input">Dimes</label>
+            <input type="text" id="dimes-input" name="dimes-input" class="TillInput">
+        </li>
+
+        <li class="form-row">
+            <label for="nickels-input">Nickels</label>
+            <input type="text" id="nickels-input" name="nickels-input" class="TillInput">
+        </li>
+
+        <li class="form-row">
+            <label for="pennies-input">Pennies</label>
+            <input id="pennies-input" name="pennies-input" class="TillInput">
+        </li>
+
+        <li class="form-row" id="total-till">
+            <label for="total-till">Total</label>
+
+        </li>
+
+    </ul>
+
+
+
+
+
+
+</body>
+
 </html>
+
+<script async defer>
+    validHtmlIntegerInput = (ele) => {
+        checkNumber = Number(ele.value)
+        if (!Number.isNaN(checkNumber) && Number.isInteger(checkNumber) && checkNumber > 0)
+            return true
+        console.log(ele)
+        return false
+
+    }
+    tillInputEle = []
+    const elPennyInput = document.getElementById("pennies-input")
+
+    const elNicketInput = document.getElementById("nickels-input")
+    const elTillTotal = document.getElementById('total-till')
+
+
+
+    totalTill = () => elPennyInput.value + elNicketInput.value
+
+
+
+    elPennyInput.addEventListener('change', (event) => {
+        if (validHtmlIntegerInput(elPennyInput)) {
+            console.log(totalTill())
+        }
+        elements = document.querySelectorAll(".TillInput")
+
+        elements.forEach(element => {
+            validHtmlIntegerInput(element)
+        });
+
+    });
+</script>
