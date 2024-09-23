@@ -24,7 +24,7 @@
             padding: .5em;
         }
 
-        .form-row>label{
+        .form-row>label {
             padding: .5em 1em .5em 0;
             flex: 2;
             flex-basis: 4em;
@@ -32,7 +32,8 @@
             flex-shrink: 0;
         }
 
-        .form-row>input, .form-row>output{
+        .form-row>input,
+        .form-row>output {
             flex: 1;
             flex-basis: 4em;
             flex-grow: 0;
@@ -44,7 +45,8 @@
 
 
         .form-row>input,
-        .form-row>button,  .form-row>output {
+        .form-row>button,
+        .form-row>output {
             padding: .5em;
         }
 
@@ -81,12 +83,12 @@
     <ul class="wrapper">
         <li class="form-row">
             <label for="fiftys-input">Fifty</label>
-            <input type="text" id="fiftys-input" name="fiftys-input"  class="TillInput">
+            <input type="text" id="fiftys-input" name="fiftys-input" class="TillInput">
         </li>
 
         <li class="form-row">
             <label for="twentys-input">Twenty</label>
-            <input type="text" id="twentys-input" name="twentys-input"  class="TillInput">
+            <input type="text" id="twentys-input" name="twentys-input" class="TillInput">
         </li>
 
         <li class="form-row">
@@ -150,25 +152,25 @@
 
 
     getMultipler = (ele) => {
-    
+
         switch (ele.name) {
             case 'pennies-input':
-               return 1
+                return 1
             case 'nickels-input':
                 return 5
-            case 'dimes-input' : 
+            case 'dimes-input':
                 return 10
             case 'quarters-input':
                 return 25
-            case 'dollars-input': 
+            case 'dollars-input':
                 return 100
-            case 'fives-input': 
+            case 'fives-input':
                 return 500
-            case 'tens-input': 
+            case 'tens-input':
                 return 1000
-            case 'twentys-input': 
+            case 'twentys-input':
                 return 2000
-            case 'fiftys-input': 
+            case 'fiftys-input':
                 return 5000
             default:
             // code block
@@ -176,26 +178,33 @@
 
     }
 
+    totalTill = (elements) => {
+        let total = 0
+       
+        elements.forEach(element => {
+            if (validHtmlIntegerInput(element)) {
+                console.log(getMultipler(element))
+                let eleTotal = Number(element.value) * getMultipler(element)
+                total += (Number(element.value) * getMultipler(element) ) / 100 
+                totalElement.value = total.toFixed(2)
+            }
+        }); 
 
+    }
 
 
     window.addEventListener("load", (event) => {
-        let total = 0
+
         elements = document.querySelectorAll(".TillInput")
         totalElement = document.getElementById('total-till')
         elements.forEach(element => {
             element.addEventListener('change', (event) => {
                 console.log(element)
-                if (validHtmlIntegerInput(element)) {
-                    console.log( getMultipler(element))
-                    let eleTotal = Number(element.value) * getMultipler(element)
-                    total += Number(element.value) * getMultipler(element)
-                    totalElement.value = total
-                }
+                totalTill(elements); 
             });
 
         });
     });
 
-   
+
 </script>
